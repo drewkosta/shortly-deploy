@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-  //grrrrunting
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
@@ -71,10 +71,13 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
+  // grunt.registerTask('nodemon', ['nodemon']);
+
 
   grunt.registerTask('test', [
     'mochaTest'
   ]);
+
 
   grunt.registerTask('build', [
   ]);
