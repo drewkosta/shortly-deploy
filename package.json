@@ -10,7 +10,6 @@
   },
   "scripts": {
     "start": "grunt build && grunt upload",
-    "push": "git add . | git commit -m 'deploy new version' | git push live master",
     "test": "grunt test",
     "lint": "eslint ./"
   },

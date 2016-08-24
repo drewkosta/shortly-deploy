@@ -51,6 +51,9 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+      },
+      livePush: {
+        command: 'git push live master'
       }
     },
   });
@@ -72,6 +75,8 @@ module.exports = function(grunt) {
   // Main grunt tasks
   ////////////////////////////////////////////////////
   // grunt.registerTask('nodemon', ['nodemon']);
+
+  grunt.registerTask('livePush', ['shell:livePush']);
 
 
   grunt.registerTask('test', [
