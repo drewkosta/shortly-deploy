@@ -53,7 +53,6 @@ module.exports = function(grunt) {
         './public/client/*.js',
         './app/collections/*.js',
         './app/models/*.js',
-        './lib/*.js'
       ]
     },
 
@@ -126,26 +125,25 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('build', [
-  ]);
-
-  grunt.registerTask('upload', function(n) {
-    if (grunt.option('prod')) {
-      // add your production server task here
-    } else {
-      grunt.task.run([ 'server-dev' ]);
-    }
-  });
-
-  grunt.registerTask('deploy', [
-    // add your deploy tasks here
     'eslint',
     'test',
     'concat',
     'uglify',
     'cssmin',
     'clean',
-    'livePush'
   ]);
 
+  grunt.registerTask('upload', function(n) {
+    if (grunt.option('prod')) {
+      // add your production server task here
+      grunt.task.run(['livePush', 'server-dev']);
+    } else {
+      grunt.task.run([ 'server-dev' ]);
+    }
+  });
 
+  grunt.registerTask('deploy', [
+    'build',
+    'upload'
+  ]);
 };
