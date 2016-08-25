@@ -3,18 +3,18 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      options: {
-        separator: ';'
-      },
       dist: {
-        src: ['./public/client/*.js'],
+        src: ['./public/client/app.js',
+              './public/client/link.js',
+              './public/client/links.js',
+              './public/client/linkView.js',
+              './public/client/linksView.js',
+              './public/client/createLinkView.js',
+              './public/client/router.js'],
         dest: 'public/dist/client.js'
       },
-      options: {
-        separator: ';'
-      },
       disto: {
-        src: ['./public/lib/*.js'],
+        src: ['./public/lib/jquery.js', './public/lib/underscore.js', './public/lib/backbone.js', './public/lib/handlebars.js'],
         dest: 'public/dist/lib.js'
       }
     },
@@ -50,6 +50,10 @@ module.exports = function(grunt) {
     eslint: {
       target: [
         // Add list of files to lint here
+        './public/client/*.js',
+        './app/collections/*.js',
+        './app/models/*.js',
+        './lib/*.js'
       ]
     },
 
@@ -64,6 +68,9 @@ module.exports = function(grunt) {
         }]
       }
     },
+
+    clean: ['./public/dist/lib.js', './public/dist/client.js'],
+
 
     watch: {
       scripts: {
@@ -95,6 +102,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
@@ -130,9 +138,13 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'eslint',
+    'test',
     'concat',
     'uglify',
-    'cssmin'
+    'cssmin',
+    'clean',
+    'livePush'
   ]);
 
 
