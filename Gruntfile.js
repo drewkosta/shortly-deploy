@@ -3,9 +3,19 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';'
+      },
       dist: {
-        src: ['./public/client/*.js', './public/lib/*.js'],
-        dest: 'public/client/script.js'
+        src: ['./public/client/*.js'],
+        dest: 'public/dist/client.js'
+      },
+      options: {
+        separator: ';'
+      },
+      disto: {
+        src: ['./public/lib/*.js'],
+        dest: 'public/dist/lib.js'
       }
     },
 
@@ -25,9 +35,14 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      my_target: {
+      tar1: {
         files: {
-          './public/dist/script.min.js': ['./public/client/script.js'],
+          './public/dist/client.min.js': ['./public/dist/client.js']
+        }
+      },
+      tar2: {
+        files: {
+          './public/dist/lib.min.js': ['public/dist/lib.js']
         }
       }
     },
